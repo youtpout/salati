@@ -17,7 +17,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.yourname.salati",
       "infoPlist": {
-        "UIBackgroundModes": ["audio"],
+        "UIBackgroundModes": [
+          "audio"
+        ],
         "NSLocationWhenInUseUsageDescription": "L'application a besoin de votre position pour calculer les horaires de prière de votre ville."
       }
     },
@@ -41,7 +43,6 @@
     },
     "plugins": [
       "expo-router",
-      "expo-keep-awake",
       [
         "expo-location",
         {

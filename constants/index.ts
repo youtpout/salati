@@ -10,7 +10,7 @@ export const PRAYER_NAMES: Record<string, PrayerInfo> = {
 };
 
 // URLs pour streaming audio (fichiers distants)
-export const ADHAN_SOURCES: Record<AdhanType, string> = {
+export const ADHAN_SOURCES: Record<AdhanType, number> = {
   makkah: require('@/assets/sounds/adhan-makkah.mp3'),
   madinah: require('@/assets/sounds/adhan-madinah.mp3'),
   alaqsa: require('@/assets/sounds/adhan-alaqsa.mp3'),

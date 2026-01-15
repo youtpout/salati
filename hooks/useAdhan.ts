@@ -8,18 +8,9 @@ export function useAdhan(
   settings: Settings
 ) {
   const lastPlayedMinuteRef = useRef<number>(-1);
-  const currentAdhanRef = useRef<AdhanType>(settings.selectedAdhan);
-  
-  // Créer le player avec l'URL de l'adhan sélectionné
-  const player = useAudioPlayer({ uri: ADHAN_SOURCES[settings.selectedAdhan] });
 
-  // Mettre à jour la source quand l'adhan change
-  useEffect(() => {
-    if (currentAdhanRef.current !== settings.selectedAdhan) {
-      currentAdhanRef.current = settings.selectedAdhan;
-      player.replace({ uri: ADHAN_SOURCES[settings.selectedAdhan] });
-    }
-  }, [settings.selectedAdhan, player]);
+  // Créer le player avec la source initiale
+  const player = useAudioPlayer(ADHAN_SOURCES[settings.selectedAdhan]);
 
   // Configurer le mode audio au montage
   useEffect(() => {
@@ -28,14 +19,16 @@ export function useAdhan(
     });
   }, []);
 
-  const playAdhan = useCallback(async (adhanType?: AdhanType) => {
+  // Mettre à jour la source quand l'adhan sélectionné change
+  useEffect(() => {
+    const newSource = ADHAN_SOURCES[settings.selectedAdhan];
+    if (newSource) {
+      player.replace(newSource);
+    }
+  }, [settings.selectedAdhan, player]);
+
+  const playAdhan = useCallback(() => {
     try {
-      // Si on veut jouer un adhan différent temporairement
-      if (adhanType && adhanType !== currentAdhanRef.current) {
-        player.replace({ uri: ADHAN_SOURCES[adhanType] });
-      }
-      
-      // Remettre au début et jouer
       player.seekTo(0);
       player.play();
     } catch (error) {
@@ -55,14 +48,13 @@ export function useAdhan(
     const checkAdhanTime = () => {
       const now = new Date();
       const currentMinute = now.getHours() * 60 + now.getMinutes();
-      
-      // Ne pas vérifier la même minute deux fois
+
       if (currentMinute === lastPlayedMinuteRef.current) return;
-      
+
       const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-      
+
       const prayers: PrayerName[] = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
-      
+
       for (const prayer of prayers) {
         if (prayerTimes[prayer] === currentTime && settings.adhanEnabled[prayer]) {
           lastPlayedMinuteRef.current = currentMinute;

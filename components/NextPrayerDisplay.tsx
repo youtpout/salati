@@ -46,11 +46,13 @@ export function NextPrayerDisplay({ nextPrayer, getCountdown }: NextPrayerDispla
 
 const styles = StyleSheet.create({
   container: {
+     alignSelf: 'center',
     backgroundColor: COLORS.bgCard,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderRadius: 24,
     padding: 6,
+    paddingHorizontal: 20,
     alignItems: 'center',
     position: 'relative',
     overflow: 'hidden',

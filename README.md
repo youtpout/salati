@@ -129,3 +129,5 @@ Pour un vrai mode kiosque sur Android :
 ## 📄 Licence
 
 MIT
+
+ <a href='https://fr.pngtree.com/freebackground/the-holy-kaaba-and-surrounding-masjid-al-haram_16494512.html'>photos fond gratuites de fr.pngtree.com/</a>

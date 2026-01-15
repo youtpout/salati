@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     minWidth: 140,
   },
   cardPassed: {
-    opacity: 0.5,
+    opacity: 1,
   },
   cardActive: {
     borderColor: COLORS.accentGold,

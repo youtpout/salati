@@ -121,13 +121,11 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: COLORS.bgPrimary,
+    flex: 1,   
     padding: 20,
   },
   loadingContainer: {
     flex: 1,
-    backgroundColor: COLORS.bgPrimary,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 16,

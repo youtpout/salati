@@ -9,7 +9,7 @@
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#0a1628"
     },
@@ -49,7 +49,15 @@
           "locationWhenInUsePermission": "L'application a besoin de votre position pour calculer les horaires de prière."
         }
       ],
-      "expo-audio"
+      "expo-audio",
+      [
+        "expo-navigation-bar",
+        {
+          "visibility": "hidden",
+          "behavior": "inset-swipe",
+          "backgroundColor": "#00000000"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

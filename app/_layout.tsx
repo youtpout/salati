@@ -17,7 +17,7 @@ export default function RootLayout() {
     >
       {/* Overlay optionnel pour lisibilité */}
       <View style={styles.overlay}>
-        <StatusBar style="light" hidden />
+        <StatusBar style="light" hidden translucent />
         <Stack
           screenOptions={{
             headerShown: false,

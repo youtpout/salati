@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -29,15 +29,6 @@ export default function HomeScreen() {
   const { playAdhan, stopAdhan } = useAdhan(prayerTimes, settings);
   
   const [settingsVisible, setSettingsVisible] = useState(false);
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  // Mettre à jour l'heure actuelle chaque seconde
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   if (loading || !settingsLoaded) {
     return (
@@ -66,12 +57,6 @@ export default function HomeScreen() {
     prayersList.push('sunrise');
   }
   prayersList.push('dhuhr', 'asr', 'maghrib', 'isha');
-
-  const formattedTime = currentTime.toLocaleTimeString('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  });
 
   return (
     <View style={styles.container}>
@@ -121,11 +106,6 @@ export default function HomeScreen() {
         )}
       </ScrollView>
 
-      {/* Heure actuelle */}
-      <View style={styles.currentTimeContainer}>
-        <Text style={styles.currentTime}>{formattedTime}</Text>
-      </View>
-
       {/* Modal Paramètres */}
       <SettingsModal
         visible={settingsVisible}
@@ -143,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.bgPrimary,
-    padding: 24,
+    padding: 20,
   },
   loadingContainer: {
     flex: 1,
@@ -167,26 +147,12 @@ const styles = StyleSheet.create({
   },
   content: {
     flexGrow: 1,
-    justifyContent: 'center',
-    gap: 24,
-    paddingBottom: 60,
+    gap: 16,
   },
   prayerGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: 12,
-  },
-  currentTimeContainer: {
-    position: 'absolute',
-    bottom: 24,
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-  },
-  currentTime: {
-    color: COLORS.textMuted,
-    fontSize: 16,
-    fontWeight: '300',
+    gap: 10,
   },
 });

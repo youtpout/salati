@@ -152,7 +152,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
         }
 
         /* Next prayer section */
@@ -162,7 +162,7 @@
             text-align: center;
 
             width: 30vw;
-            padding: 3rem;
+            padding: 1rem;
             background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
             border-radius: 24px;
             border: 1px solid var(--border);
@@ -575,6 +575,7 @@
             alaqsa: 'assets/sounds/adhan-alaqsa.mp3',
             mishary: 'assets/sounds/adhan-mishary.mp3',
             egypt: 'assets/sounds/adhan-egypt.mp3',
+            marwan: 'assets/sounds/adhan-marwan.mp3',
         };
 
         // Default settings
@@ -1003,6 +1004,7 @@
                                 <option value="alaqsa" ${settings.selectedAdhan === 'alaqsa' ? 'selected' : ''}>Al-Aqsa</option>
                                 <option value="mishary" ${settings.selectedAdhan === 'mishary' ? 'selected' : ''}>Mishary Rashid</option>
                                 <option value="egypt" ${settings.selectedAdhan === 'egypt' ? 'selected' : ''}>Égypte</option>
+                                <option value="marwan" ${settings.selectedAdhan === 'marwan' ? 'selected' : ''}>Marwan</option>
                             </select>
                         </div>
                         <div style="margin-top: 0.5rem;">

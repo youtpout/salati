@@ -641,8 +641,78 @@
             throw new Error('Failed to fetch prayer times');
         }
 
+        function getQueryParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        function normalizeFrenchCP(cp) {
+            const s = String(cp || '').trim();
+            if (!/^\d{5}$/.test(s)) return null;
+            return s;
+        }
+
+        async function geocodeByPostalCode(cp) {
+            // Exemple: https://nominatim.openstreetmap.org/search?postalcode=75001&country=fr&format=json&limit=1
+            const url = `https://nominatim.openstreetmap.org/search?postalcode=${encodeURIComponent(cp)}&country=fr&format=json&limit=1&addressdetails=1`;
+
+            const res = await fetch(url, {
+                headers: {
+                    // conseillé par Nominatim (pas obligatoire mais utile)
+                    'Accept': 'application/json'
+                }
+            });
+            const data = await res.json();
+
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error(`CP introuvable: ${cp}`);
+            }
+
+            const hit = data[0];
+            const addr = hit.address || {};
+
+            return {
+                lat: Number(hit.lat),
+                lon: Number(hit.lon),
+                city: addr.city || addr.town || addr.village || addr.municipality || addr.county || `CP ${cp}`,
+                country: addr.country || 'France',
+            };
+        }
+
+        function getCachedCpLocation(cp) {
+            try {
+                const raw = localStorage.getItem(`cpLocation:${cp}`);
+                if (!raw) return null;
+                const parsed = JSON.parse(raw);
+                // expire au bout de 7 jours
+                if (Date.now() - parsed.savedAt > 7 * 24 * 60 * 60 * 1000) return null;
+                return parsed.value;
+            } catch {
+                return null;
+            }
+        }
+
+        function setCachedCpLocation(cp, value) {
+            try {
+                localStorage.setItem(`cpLocation:${cp}`, JSON.stringify({ savedAt: Date.now(), value }));
+            } catch { }
+        }
+
         // Get location
         async function getLocation() {
+            // ✅ priorité au CP dans l’URL
+            const cpRaw = getQueryParam('cp');
+            const cp = normalizeFrenchCP(cpRaw);
+
+            if (cp) {
+                const cached = getCachedCpLocation(cp);
+                if (cached) return cached;
+
+                const loc = await geocodeByPostalCode(cp);
+                setCachedCpLocation(cp, loc);
+                return loc;
+            }
+
             return new Promise((resolve, reject) => {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(

@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: COLORS.accentGold,
     marginBottom: 3,
-    textShadowColor: COLORS.accentGold,
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 20,
+    // textShadowColor: COLORS.accentGold,
+    // textShadowOffset: { width: 0, height: 0 },
+    // textShadowRadius: 20,
   },
   time: {
     fontSize: 64,

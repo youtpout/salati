@@ -16,8 +16,8 @@
             --accent-gold: #d4af37;
             --accent-emerald: #10b981;
             --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
+            --text-secondary: #b4c3d8;
+            --text-muted: #f8fafc50;
             --border: rgba(212, 175, 55, 0.2);
             --glow: rgba(212, 175, 55, 0.3);
         }
@@ -84,7 +84,7 @@
 
         .date-display {
             text-align: left;
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 16px;
             padding: 1rem 1.5rem;
             backdrop-filter: blur(10px);
@@ -173,7 +173,7 @@
         }
 
         .countdown {
-            font-size: 1.1rem;
+            font-size: 2rem;
             color: var(--text-secondary);
         }
 
@@ -218,7 +218,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 16px;
             padding: 0.75rem 1.25rem;
             backdrop-filter: blur(10px);
@@ -280,7 +280,7 @@
         }
 
         .prayer-card {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(21, 42, 66, 0.3) 0%, rgba(15, 33, 55, 0.3) 100%);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 0.5rem;
@@ -288,7 +288,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(3px);
         }
 
         .prayer-card::after {
@@ -360,7 +360,7 @@
 
         .prayer-card.shuruq .prayer-card-time,
         .prayer-card.forbidden .prayer-card-time {
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
 
         /* Forbidden times indicator */
